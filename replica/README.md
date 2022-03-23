@@ -1,8 +1,6 @@
 # draw.io plugin: replica
 
-insert replica original shape to replica targets children.
-
-if replica target has replica already, update shape.
+Replicate original shape to replica targets.
 
 INSTALL URL: https://raw.githubusercontent.com/nunun/draw.io-plugins/main/replica/replica.js
 
