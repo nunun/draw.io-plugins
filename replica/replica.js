@@ -46,20 +46,20 @@ function updateReplicaCellGraph(ui, replicaCell, replicaOriginalCell) {
     //console.log("replicaCell", replicaCell, "replicaOriginalCell", replicaOriginalCell);
 
     // Remove replica children.
-    var lastOrder = removeReplicatedCells(ui, replicaCell.children);
+    var removed = removeReplicatedCells(ui, replicaCell.children);
 
     // Insert cloned original into replica children.
     var clonedCell = graph.cloneCell(replicaOriginalCell);
     graph.getModel().add(replicaCell, clonedCell);
-    clonedCell.geometry.x = 0;
-    clonedCell.geometry.y = 0;
-    replicaCell.geometry.width  = Math.max(replicaCell.geometry.width, clonedCell.geometry.width);
-    replicaCell.geometry.height = Math.max(replicaCell.geometry.height, clonedCell.geometry.height);
+    clonedCell.geometry.x = (removed.cell)? removed.cell.geometry.x : 0;
+    clonedCell.geometry.y = (removed.cell)? removed.cell.geometry.x : 0;
+    replicaCell.geometry.width  = Math.max(replicaCell.geometry.width,  clonedCell.geometry.x + clonedCell.geometry.width);
+    replicaCell.geometry.height = Math.max(replicaCell.geometry.height, clonedCell.geometry.x + clonedCell.geometry.height);
 
     // Restore cell order.
     var order = replicaCell.getIndex(clonedCell);
-    var count = Math.abs(order - lastOrder);
-    var back  = (order >= lastOrder);
+    var count = Math.abs(order - removed.order);
+    var back  = (order >= removed.order);
     for (var i = 0; i < count; i++) {
         graph.orderCells(back, [clonedCell]);
     }
@@ -115,17 +115,18 @@ function configureClonedCell(clonedCell) {
 }
 
 function removeReplicatedCells(ui, cells) {
-    var order  = (cells)? cells.length : 0;
-    var length = order;
-    for (var i in cells) {
+    var removed = {cell:null, order:0};
+    var cells = cells || [];
+    for (var i = cells.length - 1; i >= 0; i--) {
         var cell = cells[i];
         if (cell.value && (typeof cell.value == "object") && cell.hasAttribute("replicated")) {
             ui.editor.graph.removeCells([cell], false);
+            removed.cell  = cell;
+            removed.order = i;
             //console.log(cell);
-            order = Math.min(order, i);
         }
     }
-    return (order >= 0 && order < length)? order : 0;
+    return removed;
 }
 
 function traverseCells(cell, matchFunc, data) {
