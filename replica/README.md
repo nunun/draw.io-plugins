@@ -2,7 +2,7 @@
 
 Replicate original shape to replica targets.
 
-INSTALL URL: https://raw.githubusercontent.com/nunun/draw.io-plugins/main/replica/replica.js
+DOWNLOAD URL: https://raw.githubusercontent.com/nunun/draw.io-plugins/main/replica/replica.js
 
 ## How to use
 
@@ -14,3 +14,9 @@ INSTALL URL: https://raw.githubusercontent.com/nunun/draw.io-plugins/main/replic
 
  3. Replicate
     * press "Replicate" button in toolbar.
+
+## License
+
+Released under the BSD 2-Caluse License.
+
+see https://github.com/nunun/draw.io-plugins/blob/main/LICENSE
