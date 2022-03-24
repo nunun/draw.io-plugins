@@ -1,5 +1,7 @@
 # draw.io plugins
 
+My handmade draw.io plugins.
+
 ## License
 
 Released under the BSD 2-Caluse License.
