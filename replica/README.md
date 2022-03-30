@@ -4,7 +4,7 @@ Replicate original shape to replica targets.
 
 DOWNLOAD URL: https://raw.githubusercontent.com/nunun/draw.io-plugins/main/replica/replica.js
 
-![replica](/replica.gif)
+![replica](/replica/operation.gif)
 
 ## How to use
 
